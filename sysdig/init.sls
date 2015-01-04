@@ -1,4 +1,5 @@
-sysdig-deb-repo:
+{% if grains['os_family'] == 'Debian' %}
+deb_repo:
   pkgrepo.managed:
     - humanname: Sysdig
     - name: deb http://download.draios.com/stable/deb stable-$(ARCH)/
@@ -7,6 +8,7 @@ sysdig-deb-repo:
     - enabled: true
     - require_in:
       - pkg: sysdig
+{% endif %}
 sysdig:
   pkg:
     - installed
